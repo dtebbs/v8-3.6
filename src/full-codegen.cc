@@ -291,8 +291,10 @@ bool FullCodeGenerator::MakeCode(CompilationInfo* info) {
   code->set_optimizable(info->IsOptimizable());
   cgen.PopulateDeoptimizationData(code);
   code->set_has_deoptimization_support(info->HasDeoptimizationSupport());
+#if defined(ENABLE_DEBUGGER_SUPPORT)
   code->set_has_debug_break_slots(
       info->isolate()->debugger()->IsDebuggerActive());
+#endif
   code->set_allow_osr_at_loop_nesting_level(0);
   code->set_stack_check_table_offset(table_offset);
   CodeGenerator::PrintCode(code, info);
